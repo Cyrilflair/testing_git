@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'tomcat-credentials', usernameVariable: 'admin', passwordVariable: 'admin')]) {
+                withCredentials([usernamePassword(credentialsId: 'tomcat', usernameVariable: 'admin', passwordVariable: 'admin')]) {
                     // deploy the WAR file to Tomcat using curl
                     sh 'curl -u $TOMCAT_USER:$TOMCAT_PASS -T target/hello-world.war http://13.250.64.185:8080/manager/text/deploy?path=/hello-world&update=true'
                 }
