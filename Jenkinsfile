@@ -20,7 +20,7 @@ pipeline {
     post {
         always {
             // cleanup after the build by undeploying the app from Tomcat
-            withCredentials([usernamePassword(credentialsId: 'tomcat-credentials', usernameVariable: 'admin', passwordVariable: 'admin')]) {
+            withCredentials([usernamePassword(credentialsId: 'tomcat', usernameVariable: 'admin', passwordVariable: 'admin')]) {
                 sh 'curl -u $TOMCAT_USER:$TOMCAT_PASS http://13.250.64.185:8080/manager/text/undeploy?path=/hello-world'
             }
         }
