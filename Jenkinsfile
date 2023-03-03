@@ -1,14 +1,16 @@
 pipeline {
     agent any
+
     stages {
         stage('Build') {
             steps {
-                sh 'echo "<html><body><h1>Testing Hello, World!</h1></body></html>" > index.html'
+                sh 'mvn package'
             }
         }
-        stage('Publish') {
+
+        stage('Deploy') {
             steps {
-                archiveArtifacts artifacts: 'index.html'
+                tomcat deployUrl: 'http://13.250.64.185:8080/manager/text', credentialsId: 'tomcat', war: 'target/*.war'
             }
         }
     }
